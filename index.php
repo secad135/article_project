@@ -62,7 +62,7 @@ if($result === false){
             <ul>
                 <?php foreach ($articles as $article): ?>
                     <li>
-                        <b><?= $article['title']; ?></b>
+                        <h2><?= $article['title']; ?></h2>
                         <p><?= $article['content']; ?></p>
                     </li>
                     <?php endforeach; ?>
