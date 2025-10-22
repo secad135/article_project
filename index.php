@@ -1,17 +1,32 @@
 <?php
+// array deleted
 
-$articles = [
-    [
-        "title" => "first post",
-        "content" => "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque ducimus quibusdam doloremque sequi explicabo vero? Aliquid enim obcaecati repellat quidem magni similique, facilis rem ad placeat nesciunt deleniti quia soluta.",
-    ],
+//connection to datatbase
+$db_host = "localhost";
+$db_user = "ap_user";
+$db_pass = "123456";
+$db_name = "article_project";
 
-    [
-        "title" => "second thing",
-        "content" => "another Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque ducimus quibusdam doloremque sequi explicabo vero? Aliquid enim obcaecati repellat quidem magni similique, facilis rem ad placeat nesciunt deleniti quia soluta."
-    ]
-];
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+// database created with phpmyadmin "article_project"
+// table added to it, and two rows added there
 
+if(mysqli_connect_error()){
+    echo mysqli_connect_error();
+    exit;
+}
+
+$sql = "SELECT *
+        FROM article
+        ORDER BY published_at;";
+
+$result = mysqli_query($conn, $sql);
+
+if($result === false){
+    echo mysqli_error($conn);
+} else{
+    $articles = mysqli_fetch_all($result,MYSQLI_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
