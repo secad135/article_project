@@ -54,14 +54,20 @@ if($result === false){
         <h1>my blog</h1>
     </header>
     <main>
-        <ul>
-            <?php foreach ($articles as $article): ?>
-                <li>
-                    <b><?= $article['title']; ?></b>
-                    <p><?= $article['content']; ?></p>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php
+        // this if shown when sql statement 
+        if (empty($articles)): ?>
+            <p>No article found.</p>
+            <?php else: ?>
+            <ul>
+                <?php foreach ($articles as $article): ?>
+                    <li>
+                        <b><?= $article['title']; ?></b>
+                        <p><?= $article['content']; ?></p>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
     </main>
 </body>
 
