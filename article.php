@@ -15,10 +15,10 @@ if (mysqli_connect_error()) {
     exit;
 }
 
-// updated sql for one record
+// get the id of post from url
 $sql = "SELECT *
         FROM article
-        WHERE id= 1;";
+        WHERE id= " . $_GET['id'];
 
 $result = mysqli_query($conn, $sql);
 
