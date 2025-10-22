@@ -1,5 +1,5 @@
 <?php
-// array deleted
+
 
 //connection to datatbase
 $db_host = "localhost";
@@ -8,24 +8,24 @@ $db_pass = "123456";
 $db_name = "article_project";
 
 $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-// database created with phpmyadmin "article_project"
-// table added to it, and two rows added there
+
 
 if (mysqli_connect_error()) {
     echo mysqli_connect_error();
     exit;
 }
 
+// updated sql for one record
 $sql = "SELECT *
         FROM article
-        ORDER BY published_at;";
+        WHERE id= 1;";
 
 $result = mysqli_query($conn, $sql);
 
 if ($result === false) {
     echo mysqli_error($conn);
 } else {
-    $articles = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    $article = mysqli_fetch_assoc($result);
 }
 ?>
 
@@ -47,9 +47,6 @@ if ($result === false) {
             margin: 0 auto;
             background-color: beige;
         }
-        li{
-            list-style: none;
-        }
     </style>
 </head>
 
@@ -59,20 +56,14 @@ if ($result === false) {
     </header>
     <main>
         <?php
-        // this if shown when sql statement 
-        if (empty($articles)): ?>
-            <p>No article found.</p>
+        if ($article === null): ?>
+            <p>Article not found.</p>
         <?php else: ?>
-            <ul>
-                <?php foreach ($articles as $article): ?>
-                    <li>
-                        <article>
-                            <h2><?= $article['title']; ?></h2>
-                            <p><?= $article['content']; ?></p><hr>
-                        </article>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+            <article>
+                <!-- no for loop for single article -->
+                <h2><?= $article['title']; ?></h2>
+                <p><?= $article['content']; ?></p>
+            </article>
         <?php endif; ?>
     </main>
 </body>
